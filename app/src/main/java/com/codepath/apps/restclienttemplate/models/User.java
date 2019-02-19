@@ -17,4 +17,12 @@ public class User {
         name = json_in.getString("name");
     }
 
+    public String getProfileImageURL() {
+        return profileImageURL;
+    }
+
+    public String getBiggerProfileImageURL() {
+        String bigger = profileImageURL.replace("normal", "bigger");
+        return bigger;
+    }
 }

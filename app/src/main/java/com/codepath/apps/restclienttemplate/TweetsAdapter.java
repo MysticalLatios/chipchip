@@ -48,8 +48,18 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
         //use glide to load the remote image into the image view holder
         Log.d("twitterpic", tweet.user.profileImageURL);
-        Glide.with(context).load(tweet.user.profileImageURL).into(viewHolder.ivProfileImage);
+        Glide.with(context).load(tweet.user.getBiggerProfileImageURL()).into(viewHolder.ivProfileImage);
 
+    }
+
+    public void clear(){
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addTweets(List<Tweet> tweetList){
+        tweets.addAll(tweetList);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
