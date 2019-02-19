@@ -44,7 +44,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         Tweet tweet = tweets.get(i);
         viewHolder.tvBody.setText(tweet.body);
         viewHolder.tvScreenName.setText(tweet.user.screenName);
-        viewHolder.tvDate.setText(tweet.date);
+        viewHolder.tvDate.setText(tweet.getRelativeDate());
 
         //use glide to load the remote image into the image view holder
         Log.d("twitterpic", tweet.user.profileImageURL);

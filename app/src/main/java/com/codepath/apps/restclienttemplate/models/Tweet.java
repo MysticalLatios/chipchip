@@ -3,6 +3,8 @@ package com.codepath.apps.restclienttemplate.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.codepath.apps.restclienttemplate.TimeFormatter;
+
 public class Tweet {
     public long uid;
     public String body;
@@ -20,5 +22,10 @@ public class Tweet {
         tweet.user = new User(josnObject.getJSONObject("user"));
 
         return tweet;
+    }
+
+    public String getRelativeDate() {
+
+        return TimeFormatter.getTimeDifference(date);
     }
 }
