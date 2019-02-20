@@ -13,7 +13,8 @@ public class User {
     public User(JSONObject json_in) throws JSONException {
         uid = json_in.getLong("id");
         screenName = json_in.getString("screen_name");
-        profileImageURL = json_in.getString("profile_image_url");
+        //Set the url to be https
+        profileImageURL = json_in.getString("profile_image_url".replace("http", "https"));
         name = json_in.getString("name");
     }
 
