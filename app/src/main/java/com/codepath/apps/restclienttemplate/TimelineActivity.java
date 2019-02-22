@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.github.scribejava.apis.TwitterApi;
@@ -63,6 +64,13 @@ public class TimelineActivity extends AppCompatActivity {
                     populateHomeTimeLine();
                 }
             });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     private void populateHomeTimeLine() {
