@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,6 +82,8 @@ public class TimelineActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.compose:
                 Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, ComposeActivity.class);
+                startActivity(i);
                 //composeMessage();
                 return true;
             default:
