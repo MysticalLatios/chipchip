@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity {
+
+    public static final int REQUEST_CODE = 20;
 
     private RestClient client;
     private RecyclerView rvTweets;
@@ -83,11 +86,23 @@ public class TimelineActivity extends AppCompatActivity {
             case R.id.compose:
                 Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, ComposeActivity.class);
-                startActivity(i);
+                startActivityForResult(i, REQUEST_CODE);
                 //composeMessage();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            //Get our info from the tweet we just made!
+            Tweet newTweet = data.getParcelableExtra("tweet");
+            //Add the new tweet to our timeline view
+            tweets.add(0, newTweet);
+            adapter.notifyItemInserted(0);
         }
     }
 

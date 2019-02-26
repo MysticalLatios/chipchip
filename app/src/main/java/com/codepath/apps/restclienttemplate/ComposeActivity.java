@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -53,6 +56,16 @@ public class ComposeActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             Log.d("RestClient", "Good tweet post: " + response.toString() );
+                            try {
+                                Tweet tweet = Tweet.fromJSON(response);
+                                Intent data = new Intent();
+                                data.putExtra("tweet", tweet);
+                                setResult(RESULT_OK, data);
+                                finish();
+                            }
+                            catch (JSONException e){
+                                Log.e("RestClient", "Uhhhh we failed to get our tweet we made back into out tweet class");
+                            }
                         }
 
                         @Override
