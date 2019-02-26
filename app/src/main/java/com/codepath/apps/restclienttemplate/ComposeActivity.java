@@ -2,11 +2,18 @@ package com.codepath.apps.restclienttemplate;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 public class ComposeActivity extends AppCompatActivity {
 
@@ -15,11 +22,14 @@ public class ComposeActivity extends AppCompatActivity {
     private TextView tvTweetLength;
     private Thread threadTweetLengthUpdate;
 
+    private RestClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
+        client = RestApplication.getRestClient(this);
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
         tvTweetLength = findViewById(R.id.tvTweetLength);
@@ -39,6 +49,17 @@ public class ComposeActivity extends AppCompatActivity {
                 //tweet must be good!
                 else {
                     Toast.makeText(ComposeActivity.this, tweetContent, Toast.LENGTH_LONG).show();
+                    client.composeTweet(tweetContent, new JsonHttpResponseHandler(){
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Log.d("RestClient", "Good tweet post: " + response.toString() );
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            Log.e("RestClient", "tweet post failed D=");
+                        }
+                    });
                 }
             }
         });
