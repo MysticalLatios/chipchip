@@ -31,6 +31,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Profile images loaded are the larger 73x73 versions
+- [x] Compose screen shows the amount of characters in your tweet out of 140 and limits entry in text box to 140
 
 ## Video Walkthrough
 
