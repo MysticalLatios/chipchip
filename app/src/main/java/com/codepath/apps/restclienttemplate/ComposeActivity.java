@@ -52,6 +52,7 @@ public class ComposeActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!threadTweetLengthUpdate.isInterrupted()) {
+                        //Ohh wow this is such a hack, I should have some sort of listener on the etCompose, so I only update it when it gets updated, but I have no idea how to do that, so instead we have this mess of the use of Thread()
                         Thread.sleep(100);
                         runOnUiThread(new Runnable() {
                             @Override
