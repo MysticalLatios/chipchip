@@ -103,6 +103,7 @@ public class TimelineActivity extends AppCompatActivity {
             //Add the new tweet to our timeline view
             tweets.add(0, newTweet);
             adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
         }
     }
 
